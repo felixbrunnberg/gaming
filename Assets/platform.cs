@@ -6,13 +6,14 @@ public class platform : MonoBehaviour
 {
     private PlatformEffector2D effector;
     public float waitTime;
-    void start() {
+    bool isGrounded;
+    void Start() {
 
         effector = GetComponent<PlatformEffector2D>();
     }
-    void update(){
+    void Update(){
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) &&isGrounded)
         {
             if (waitTime <= 0)
             {
@@ -36,5 +37,13 @@ public class platform : MonoBehaviour
 
 
         }
+    }
+    void OnTriggerEnter2D()
+    {
+        isGrounded = true;
+    }
+    void OnTriggerExit2D()
+    {
+        isGrounded = false;
     }
 }
