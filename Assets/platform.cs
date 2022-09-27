@@ -12,13 +12,15 @@ public class platform : MonoBehaviour
         effector = GetComponent<PlatformEffector2D>();
     }
     void Update(){
-
+        
+        effector.rotationalOffset = 0f;
         if (Input.GetKey(KeyCode.S) &&isGrounded)
         {
             if (waitTime <= 0)
             {
                 effector.rotationalOffset = 180f;
-                waitTime = 0.5f;
+                waitTime = 0f;
+                
             }
             else
             {
@@ -26,17 +28,17 @@ public class platform : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Space))
+       /* if (Input.GetKey(KeyCode.Space))
         {
             effector.rotationalOffset = 0;
+       
 
 
 
 
 
 
-
-        }
+        }*/
     }
     void OnTriggerEnter2D()
     {
