@@ -14,13 +14,12 @@ public class platform : MonoBehaviour
     void Update(){
         
         effector.rotationalOffset = 0f;
-        if (Input.GetKey(KeyCode.S) &&isGrounded)
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.Space))
         {
             if (waitTime <= 0)
             {
                 effector.rotationalOffset = 180f;
                 waitTime = 0f;
-                
             }
             else
             {

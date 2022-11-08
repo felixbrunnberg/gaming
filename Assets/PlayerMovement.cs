@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
     bool isGrounded;
+    bool dropThrough;
     
     private void Awake()
     {
@@ -16,26 +17,31 @@ public class PlayerMovement : MonoBehaviour
     {
 
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        
+        if(Input.GetKeyDown(KeyCode.Space)&& isGrounded)
         {
-           GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 15), ForceMode2D.Impulse);
-
-
+            if (Input.GetKey(KeyCode.S))
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -5), ForceMode2D.Impulse);
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 18), ForceMode2D.Impulse);
+            }
         }
+
         if (Input.GetKey(KeyCode.A))
         {
-            // transform.position -= transform.right * Time.deltaTime * moveSpeed;
             GetComponent<Rigidbody2D>().velocity = new Vector2(-1 * moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
         }
+
        if(Input.GetKey(KeyCode.D))
         {
-            //transform.position += transform.right * Time.deltaTime * moveSpeed;
             GetComponent<Rigidbody2D>().velocity = new Vector2(1 * moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
         }
-       if(Input.GetKey(KeyCode.S))
+       if(Input.GetKeyDown(KeyCode.S))
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -1), ForceMode2D.Impulse);
-
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -12), ForceMode2D.Impulse);
         }
         
     }
@@ -43,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     void OnTriggerEnter2D()
     {
         isGrounded = true;
+        dropThrough = false;
     }
     void OnTriggerExit2D()
     {
