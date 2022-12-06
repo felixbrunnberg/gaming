@@ -6,9 +6,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
-    bool isGrounded;
-    bool dropThrough;
-    
+    [SerializeField] float jumpMod;
+    public bool isWalledLeft;
+    public bool isWalledRight;
+    public bool isGrounded;
+
+
     private void Awake()
     {
         GetComponent<SpriteRenderer>();
@@ -17,8 +20,8 @@ public class PlayerMovement : MonoBehaviour
     {
 
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
-        
-        if(Input.GetKeyDown(KeyCode.Space)&& isGrounded)
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             if (Input.GetKey(KeyCode.S))
             {
@@ -26,34 +29,25 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 18), ForceMode2D.Impulse);
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 18 * jumpMod), ForceMode2D.Impulse);
+                //GetComponent<Rigidbody2D>().velocity = new Vector2(0,100);
             }
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && !isWalledLeft)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(-1 * moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
         }
 
-       if(Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && !isWalledRight)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(1 * moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
         }
-       if(Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -12), ForceMode2D.Impulse);
         }
-        
-    }
 
-    void OnTriggerEnter2D()
-    {
-        isGrounded = true;
-        dropThrough = false;
-    }
-    void OnTriggerExit2D()
-    {
-        isGrounded = false;
     }
 }
 
