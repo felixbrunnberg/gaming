@@ -5,26 +5,25 @@ using UnityEngine;
 public class platform : MonoBehaviour
 {
     private PlatformEffector2D effector;
+    [SerializeField] float passThroughTime;
     public float waitTime;
     bool isGrounded;
     void Start() {
-
         effector = GetComponent<PlatformEffector2D>();
+        effector.rotationalOffset = 0f;
     }
     void Update(){
-        
-        effector.rotationalOffset = 0f;
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.Space))
         {
-            if (waitTime <= 0)
-            {
-                effector.rotationalOffset = 180f;
-                waitTime = 0f;
-            }
-            else
-            {
-                waitTime -= Time.deltaTime;
-            }
+            effector.rotationalOffset = 180f;
+            waitTime = passThroughTime;
+        }
+
+        waitTime -= Time.deltaTime;
+
+        if(waitTime <= 0)
+        {
+            effector.rotationalOffset = 0f;
         }
 
        /* if (Input.GetKey(KeyCode.Space))
