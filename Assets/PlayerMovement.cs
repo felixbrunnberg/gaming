@@ -13,7 +13,9 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     public float playerCrouchHeight = 0.9f;
     public float playerStandHeight = 1.7f;
-    public float playerCrouchWidth = 1;
+    public float playerCrouchWidth = 1f;
+    public float playerXPos = 0f;
+
     [SerializeField] Sprite crouchSprite;
     [SerializeField] Sprite standSprite;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -73,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            GetComponent<BoxCollider2D>().size = new Vector2(1, playerStandHeight);
+            GetComponent<BoxCollider2D>().size = new Vector2(0.8f, playerStandHeight);
             GetComponent<BoxCollider2D>().offset = new Vector2(0, 0.05f);
             spriteRenderer.sprite = standSprite;
             spritepos.transform.localPosition = new Vector3(0, 0, 0);
@@ -82,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
             wallcheckRight.size = new Vector2(1, 1);
             wallcheckRight.offset = new Vector2(0, 0);
         }
+        playerXPos = gameObject.transform.position.x;
     }
 }
 

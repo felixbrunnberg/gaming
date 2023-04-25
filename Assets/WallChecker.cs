@@ -10,7 +10,7 @@ public class WallChecker : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall") && !isGround)
         {
             if (isRight)
             {
@@ -21,7 +21,7 @@ public class WallChecker : MonoBehaviour
                 player.isWalledLeft = true;
             }
         }
-        if (collision.gameObject.layer == LayerMask.NameToLayer("ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("ground") && isGround)
             player.isGrounded = true;
     }
 
