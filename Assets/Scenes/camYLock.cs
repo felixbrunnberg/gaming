@@ -10,7 +10,7 @@ public class camYLock : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
         gameObject.transform.position = new Vector3(transform.position.x, 0f, -10f);
